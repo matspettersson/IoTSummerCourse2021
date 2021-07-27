@@ -1,4 +1,4 @@
-# Tutorial on how to use MicroPython to expose sensor data
+# Exploring MicroPython, MQTT and TIG Stack
 
 **By:** Mats Pettersson (mp223ty)
 
@@ -288,8 +288,8 @@ I chose to install it native on my Raspberry Pi. Using MQTT input nodes, it is r
 
 There is also a free version that can be used. I tested out this one: http://sensetecnic.com/products-and-services/fred-build-iot-apps-faster/
 
-Locally I connect to it using: http://192.168.1.4:1880, but I have no current use cases for it. I mention Node-RED here because I believe it is a convenient way to create flows or forward the MQTT events to other sources.
-
+Locally I connect to it using: http://192.168.1.4:1880. Currently I only use it for forwarding events to test.mosquitto.org, so an old friend of mine can consume my soil humidity data. But it can be used for more complex scenarios.
+![Node-RED](nodered.png)
 
 # The code
 
@@ -370,4 +370,3 @@ The sensors are just placed on the breadboard with wires to the LoPy4. I could h
 
 ## Video presentation
 
-**TBD**,**TBD**,**TBD**,**TBD**,**TBD**,**TBD**
