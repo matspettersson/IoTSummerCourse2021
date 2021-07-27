@@ -72,6 +72,19 @@ def humid_temp_sensor():
 
     return (temperature, humidity)
 
+
+def getsoilhumidity():
+    p_out = Pin('P8', mode=Pin.OUT)
+    p_out.value(1)
+    adc = machine.ADC()
+    time.sleep(4)
+    adcread = adc.channel(attn=ADC.ATTN_11DB, pin='P17')
+
+    volts = adcread.value()
+    #print(volts)
+    p_out.value(0)
+    return 1 - (volts / 4096)
+
 def get_pressure():
     i2c=I2C(0)
     i2c.init(I2C.MASTER, pins=('P6','P7'),baudrate=48000)
@@ -87,7 +100,7 @@ def get_pressure():
 
 
 pycom.heartbeat(True)
-print("Temp, pressure and humidity check, v0.9, 2021-07-22 By: Mats Pettersson")
+print("Temp, pressure and humidity check, v0.9, 2021-07-27 By: Mats Pettersson")
 
 connect_to_wlan()
 setRTCLocalTime()
@@ -104,13 +117,14 @@ while True:
     jsondict['outsidetemp'] = temperature  #strtemp
     jsondict['outsidehumidity'] = humidity #strhumidity
     jsondict['airpressure'] = bmp180_p
+    jsondict['soilhumidity'] = soilhumidity
     jsondict['sensortime'] = sensortime
     jsondict['device'] = "MatsLopy4"
     js = str(json.dumps(jsondict))
 
     print(js)
     client = connect_to_mqtt()
-    client.publish(topic = "mats/test", msg = js )
+    #client.publish(topic = "mats/test", msg = js )
     client.disconnect()
 
     time.sleep(5)
