@@ -5,11 +5,13 @@
 
 # Objective
 
-I chose this project to explore different alternatives and solutions rather than fulfilling one specific practical use case. 
+I chose this project to explore different alternatives and solutions related to middleware rather than fulfilling one specific practical use case. 
 
 First of all, and most important, I wanted to learn about IoT and especially MicroPython devices and how they interact with sensors to collect data and how that data is shared. I also wanted to explore MQTT brokers and how to share and visualize the sensor data. 
 
 Therefore I chose to focus on local installations in my home network on a Raspberry Pi, rather than working in a cloud environment.
+
+In order to learn about connectivity with sensors I chose three different types: one digital, one using the I2C bus and one analogue. I measure temperature, air pressure, air humidity and soil humidity.
 
 ## In Summary 
 This tutorial will guide you to get started with connecting sensors to a LoPy4 device running MicroPython and expose the sensor data using MQTT.
@@ -123,7 +125,7 @@ So the port I am using is: /dev/ttyACM0.
 
 Note: You need to reinstall the firmware after formatting the file system.
 
-## Listing files on the LoPy
+## Uploading files to the LoPy
  
 To install REPL 
 ```bash
@@ -135,6 +137,10 @@ Some useful commands to list the files on the device, remove files and put files
     $ python3 -m there rm /flash/abc.py
     $ python3 -m there push bmp180.py  /flash/lib
 ```
+
+I upload the library files to the /flash/lib directory, and the main.py to the /flash directory.
+
+
 ## Hello world
 
 One way to test that you have got everything ok is to get the LED on the LoPy4 to blink. So put this code in your main.py file and run it on the LoPy4.
@@ -177,6 +183,8 @@ Soil humidity | ? | ?
 
  
 # Platform(s) and components
+
+One driver for me in this project was to not use a paid subscription. Open Source is therefore my first choice. I planned to develop APIs, but could not find a free service that met my requirements. I might continue to explore that area, but it is out of scope for this project.
 
 My setup consists of:
 - Mosquitto Message Broker for managing the MQTT events from the LoPy4.
